@@ -89,4 +89,8 @@ public class MemService {
     public void updateMemStatus(Integer memID) {
         dao.updateMemStatus(memID);
     }
+
+    public void updateStatusByMail(String account) {
+        dao.updateStatusByMail(account);
+    }
 }

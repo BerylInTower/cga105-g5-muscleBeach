@@ -32,6 +32,8 @@ public class MemJDBCDAO implements MemDAO_interface {
             "UPDATE member set mem_password=? where mem_id = ?";
     private static final String UPDATE_MEMBERSHIP =
             "UPDATE member set mem_access=0 where mem_id = ?";
+    private static final String UPDATE_BY_VERIFICATION =
+            "UPDATE member set mem_status=1 where mem_account = ?";
     private static final String UPDATE_MEMBERSTATUS =
             "UPDATE member set mem_status=2 where mem_id = ?";
     private static final String UPDATEMEMACCESS =
@@ -258,6 +260,46 @@ public class MemJDBCDAO implements MemDAO_interface {
                 }
             }
         }
+    }
+
+    public void updateStatusByMail(String account) {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+
+        try {
+
+            Class.forName(driver);
+            con = dataSource.getConnection();
+            pstmt = con.prepareStatement(UPDATE_BY_VERIFICATION);
+            pstmt.setString(1, account);
+            pstmt.executeUpdate();
+
+            // Handle any driver errors
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Couldn't load database driver. "
+                    + e.getMessage());
+            // Handle any SQL errors
+        } catch (SQLException se) {
+            throw new RuntimeException("A database error occured. "
+                    + se.getMessage());
+            // Clean up JDBC resources
+        } finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException se) {
+                    se.printStackTrace(System.err);
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (Exception e) {
+                    e.printStackTrace(System.err);
+                }
+            }
+        }
+
     }
 
     @Override

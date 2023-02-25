@@ -221,14 +221,10 @@ public class MemServlet extends HttpServlet {
             // 傳送註冊信
             String to = memMail;
             String subject = "歡迎加入 Muscle Beach！";
-//		    String chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-//			String passRandom = "";
-//			for (int i = 0; i < 8; i++) 
-//				passRandom += chars.charAt((int)(Math.random() * 62));
             String messageText = "Hello! " + memName + "，恭喜您成為 Muscle Beach 的一員！" + "\n"
-                    + "我們會努力為您帶來更好的服務與商品。" + "\n" + "\n"
-                    + "升級健身會員，可享更多優惠哦！" + "\n" + "\n";
-//		    String info = "啟用帳號：<a href='http://127.0.0.1:8080/mailWeb1602/ActiveServlet?active="+ account +"'>點此啟用</a>";
+                    + "我們會努力為您帶來更好的服務與商品。" + "\n"
+                    + "升級健身會員，可享更多優惠哦！" + "\n" + "\n"
+                    + "點此啟用帳號：http://localhost:8080/cga105_g5_war_exploded/ActiveServlet?active=" + account;
             MailService mailService = new MailService();
             mailService.sendMail(to, subject, messageText);
 

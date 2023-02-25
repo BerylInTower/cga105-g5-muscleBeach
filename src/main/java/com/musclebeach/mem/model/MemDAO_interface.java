@@ -29,4 +29,6 @@ public interface MemDAO_interface {
     void updateMembership(Integer memID);
 
     void updateMemStatus(Integer memID);
+
+    void updateStatusByMail(String account);
 }
